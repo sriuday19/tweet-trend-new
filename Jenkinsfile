@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        node {
+            label "maven"
+        }
+    }
+
+    tools {
+        jdk "java11"
+    }
+
+environment {
+
+    PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
+}
+
+    stages {
+        stage('Cloning the code from git') {
+          steps {
+            git branch: 'main', url: 'https://github.com/sriuday19/tweet-trend-new.git'
+          }
+        }
+
+        stage('Build code') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
