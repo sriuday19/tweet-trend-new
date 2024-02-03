@@ -29,6 +29,9 @@ environment {
         }
 
         stage('SonarQube Analysis') {
+            tools {
+                jdk "java17"
+            }
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
